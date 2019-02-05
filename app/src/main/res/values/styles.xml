@@ -1,0 +1,27 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorGrayLight</item>
+        <item name="colorPrimaryDark">@color/colorGrayDarker</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Bro_Title">
+        <item name="android:fontFamily">@font/latoblack</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="Bro_Input" parent="Base.V7.Widget.AppCompat.EditText">
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:fontFamily">@font/latoregular</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="colorGrayLight">#F0F0F0</color>
+    <color name="colorGrayLighter">#f5f5f5</color>
+    <color name="colorGrayDarker">#EAEAEA</color>
+    <color name="colorPrimary">#3797F0</color>
+    <color name="colorPrimaryDark">#2478C5</color>
+    <color name="colorIOSBlue">#3CA0FF</color>
+    <color name="colorAccent">#F44336</color>
+    <color name="colorGrayVeryDark">#3A3A3A</color>
+
+    <color name="shadow_dark">#ddd</color>
+    <color name="shadow_light">#00ffffff</color>
+
+    <color name="transparent_overlay">#B3FFFFFF</color>
+</resources>

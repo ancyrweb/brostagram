@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BroInput">
+        <attr name="type" format="enum">
+            <enum name="standard" value="0" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="IOSButton">
+    </declare-styleable>
+</resources>

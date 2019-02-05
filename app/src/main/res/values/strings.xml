@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BroStagram</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Confirm password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="no_account_yet">Not registered yet ? <b>Sign up !</b></string>
+    <string name="sign_up_terms">By signing up, you accept to comply to our <b>terms of service</b></string>
+
+    <string name="add_gallery">Gallery</string>
+    <string name="add_photo">Photo</string>
+    <string name="next">Next</string>
+</resources>
