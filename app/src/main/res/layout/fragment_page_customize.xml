@@ -16,32 +16,19 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/addPageCrossIcon"
+            android:id="@+id/customizePageBackIcon"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/ic_arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/addPageTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:fontFamily="@font/latobold"
-            android:text="@string/add_gallery"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/addPageCrossIcon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.516" />
-
         <com.rewieer.brostagram.view.ui.IOSButton
-            android:id="@+id/addPageNextButton"
+            android:id="@+id/backPageNextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -60,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/addPageViewPager"
+        android:id="@+id/customizePageViewPager"
         android:layout_width="417dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -82,11 +69,11 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_gallery" />
+            android:text="@string/customize_filter" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_photo" />
+            android:text="@string/customize_update" />
     </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

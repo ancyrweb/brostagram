@@ -23,9 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class GalleryRecyclerViewAdapter extends RecyclerView.Adapter<GalleryRecyclerViewAdapter.ViewHolder> {
     private final static ImageDecoder.DecodingOptions IMAGE_DECODING_OPTIONS = new ImageDecoder.DecodingOptions.Builder()
         .thumbnail(true)
-        .setHeight(400)
-        .setWidth(400)
-        .build();
+        .setHeight(256)
+        .setWidth(256)
+        .build(); // Serves
 
     /*************
      * ViewHolder

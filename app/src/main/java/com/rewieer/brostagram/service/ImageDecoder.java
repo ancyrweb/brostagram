@@ -8,6 +8,7 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.util.Log;
 import android.util.LruCache;
 import android.widget.ImageView;
 
@@ -77,7 +78,7 @@ public class ImageDecoder {
     private static final int CORE_AMOUNT = Runtime.getRuntime().availableProcessors();
     private static final int KEEP_ALIVE_TIME = 1;
     private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
-    private static int CACHE_SIZE = 128; // Amount of entries in the cache
+    private static int CACHE_SIZE = 8; // In MB
 
     private ThreadPoolExecutor mThreadPool;
     private Handler mUIThreadHandler;
@@ -93,7 +94,12 @@ public class ImageDecoder {
         );
 
         mUIThreadHandler = new Handler(Looper.getMainLooper());
-        mCache = new LruCache<>(CACHE_SIZE);
+        mCache = new LruCache<String, Bitmap>(CACHE_SIZE << 20) {
+            @Override
+            protected int sizeOf(String key, Bitmap value) {
+                return value.getByteCount();
+            }
+        };
     }
 
     private String hashPathAndOptions(String path, DecodingOptions options) {
@@ -115,7 +121,7 @@ public class ImageDecoder {
             @Override
             public void run() {
                 BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888; // 4 bytes per img
                 Bitmap file = BitmapFactory.decodeFile(path, bitmapOptions);
 
                 if (options != null && options.isThumbnail) {

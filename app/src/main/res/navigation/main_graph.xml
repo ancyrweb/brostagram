@@ -52,5 +52,13 @@
     <fragment
         android:id="@+id/addPageFragment"
         android:name="com.rewieer.brostagram.view.fragment.pages.AddPageFragment"
-        android:label="AddPageFragment" />
+        android:label="AddPageFragment" >
+        <action
+            android:id="@+id/action_addPageFragment_to_customizeImageFragment"
+            app:destination="@id/customizeImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customizeImageFragment"
+        android:name="com.rewieer.brostagram.view.fragment.pages.CustomizeImageFragment"
+        android:label="CustomizeImageFragment" />
 </navigation>

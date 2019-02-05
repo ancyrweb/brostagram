@@ -31,6 +31,7 @@ import com.rewieer.brostagram.data.gallery.GalleryPhotosViewModel;
 import com.rewieer.brostagram.data.ImageProvider;
 import com.rewieer.brostagram.data.gallery.GalleryRecyclerViewAdapter;
 import com.rewieer.brostagram.data.gallery.GalleryRecyclerViewItemProvider;
+import com.rewieer.brostagram.view.fragment.ViewPagerFragmentLifecycle;
 import com.rewieer.brostagram.view.ui.IOSButton;
 
 import java.util.List;
@@ -44,7 +45,6 @@ public class GalleryAddTab extends Fragment {
 
     GalleryPhotosViewModel mViewModel;
     ImageProvider mImageProvider;
-    MutableLiveData<Image> mSelectedImage = new MutableLiveData<>();
     Listener mListener;
 
     public GalleryAddTab() {
@@ -55,6 +55,11 @@ public class GalleryAddTab extends Fragment {
         GalleryAddTab f = new GalleryAddTab();
         f.mListener = listener;
         return f;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     @Override
@@ -105,6 +110,13 @@ public class GalleryAddTab extends Fragment {
                     return;
                 }
 
+                // Note : alas, this gets called twice each time something is selected
+                // Once to deselect the previous item, and once again to select the next
+                // This causes the "next" button to flicker on selection..
+                // This callback should only be called once, either rewrite some portion of the internals
+                // Or add a kind of debounce of a few MS.
+                // TODO : fix it
+
                 long id = -1;
                 if (tracker.hasSelection()) {
                     id = tracker.getSelection().iterator().next();
@@ -120,7 +132,6 @@ public class GalleryAddTab extends Fragment {
 
         adapter.setSelectionTracker(tracker);
         tryToLoadImages();
-
         return view;
     }
 

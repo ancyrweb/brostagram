@@ -5,20 +5,16 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rewieer.brostagram.R;
-import com.rewieer.brostagram.view.fragment.tabs.home.FeedHomeTab;
-import com.rewieer.brostagram.view.fragment.tabs.home.NotificationHomeTab;
-import com.rewieer.brostagram.view.fragment.tabs.home.ProfileHomeTab;
-import com.rewieer.brostagram.view.fragment.tabs.home.SearchHomeTab;
-import com.rewieer.brostagram.view.utils.FragmentListPagerAdapter;
+import com.rewieer.brostagram.view.fragment.tabs.HomePageFragmentPagerAdapter;
 import com.rewieer.brostagram.view.utils.TintUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +26,7 @@ public class HomePageFragment extends Fragment {
 
     public HomePageFragment() {
         // Required empty public constructor
+        Log.d("TAGG", "INSTANTIATING");
     }
 
     @Override
@@ -38,8 +35,9 @@ public class HomePageFragment extends Fragment {
         final ViewPager pager = view.findViewById(R.id.tabsViewPager);
 
         // Creating tabs
-        FragmentListPagerAdapter adapter = new FragmentListPagerAdapter(getFragmentManager(), createTabs());
+        HomePageFragmentPagerAdapter adapter = new HomePageFragmentPagerAdapter(getChildFragmentManager());
         pager.setAdapter(adapter);
+        pager.setCurrentItem(0);
 
         final Map<Integer, Integer> tabPositionMap = createTabMap();
 
@@ -83,20 +81,13 @@ public class HomePageFragment extends Fragment {
         return view;
     }
 
-    public ArrayList<Fragment> createTabs() {
-        return new ArrayList<>(Arrays.asList(
-            new FeedHomeTab(),
-            new SearchHomeTab(),
-            new NotificationHomeTab(),
-            new ProfileHomeTab()
-        ));
-    }
+
 
     /**
      *  map every tab positions to an entry into the pager
      *  That is because the tabLayout doesn't have a 1:1 correspondance with the pager
      *  The middle icon (+) is not an actual entry of the pager, it has a specific handler
-     * @return
+     * @return Map
      */
     public Map<Integer, Integer> createTabMap() {
         Map<Integer, Integer> map = new HashMap<>();
