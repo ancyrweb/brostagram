@@ -10,7 +10,7 @@
 
     <string name="add_gallery">Gallery</string>
     <string name="add_photo">Photo</string>
-    <string name="customize_filter">Filtre</string>
-    <string name="customize_update">Modifier</string>
+    <string name="customize_filter">Filters</string>
+    <string name="customize_update">Modify</string>
     <string name="next">Next</string>
 </resources>
