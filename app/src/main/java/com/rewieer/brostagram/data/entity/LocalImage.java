@@ -1,12 +1,12 @@
 package com.rewieer.brostagram.data.entity;
 
-public class Image {
+public class LocalImage {
     public String path;
     public int height;
     public int width;
     public int ID;
 
-    public Image(String path, int height, int width) {
+    public LocalImage(String path, int height, int width) {
         this.path = path;
         this.height = height;
         this.width = width;

@@ -15,9 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rewieer.brostagram.R;
-import com.rewieer.brostagram.data.entity.Image;
+import com.rewieer.brostagram.data.entity.LocalImage;
+import com.rewieer.brostagram.data.global.WorkingImageManager;
 import com.rewieer.brostagram.view.fragment.tabs.AddPageFragmentPagerAdapter;
-import com.rewieer.brostagram.view.fragment.tabs.add.CameraAddTab;
 import com.rewieer.brostagram.view.fragment.tabs.add.GalleryAddTab;
 import com.rewieer.brostagram.view.ui.IOSButton;
 
@@ -25,6 +25,8 @@ import androidx.navigation.Navigation;
 
 public class AddPageFragment extends Fragment implements GalleryAddTab.Listener {
     IOSButton mNextButton;
+    private LocalImage mSelectedImage;
+
     public AddPageFragment() {
         // Required empty public constructor
     }
@@ -46,10 +48,14 @@ public class AddPageFragment extends Fragment implements GalleryAddTab.Listener 
         ImageView crossImage = view.findViewById(R.id.addPageCrossIcon);
         final TextView pageTitle = view.findViewById(R.id.addPageTitle);
         mNextButton = view.findViewById(R.id.addPageNextButton);
-        mNextButton.setVisibility(View.GONE);
+        mNextButton.setVisibility(View.INVISIBLE);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                WorkingImageManager
+                    .getInstance()
+                    .init(mSelectedImage.path);
+
                 Navigation
                     .findNavController(getActivity(), R.id.navhost)
                     .navigate(R.id.action_addPageFragment_to_customizeImageFragment);
@@ -84,12 +90,13 @@ public class AddPageFragment extends Fragment implements GalleryAddTab.Listener 
     }
 
     @Override
-    public void onImageSelected(@Nullable Image image) {
+    public void onImageSelected(@Nullable LocalImage image) {
         if (mNextButton == null)
             return;
 
+        mSelectedImage = image;
         if (image == null) {
-            mNextButton.setVisibility(View.GONE);
+            mNextButton.setVisibility(View.INVISIBLE);
         } else {
             mNextButton.setVisibility(View.VISIBLE);
         }

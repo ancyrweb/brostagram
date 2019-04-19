@@ -3,7 +3,6 @@ package com.rewieer.brostagram.view.fragment.tabs.add;
 import android.Manifest;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -22,29 +21,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.rewieer.brostagram.R;
-import com.rewieer.brostagram.data.entity.Image;
+import com.rewieer.brostagram.data.entity.LocalImage;
 import com.rewieer.brostagram.data.gallery.GalleryItemDetailsLookup;
 import com.rewieer.brostagram.data.gallery.GalleryPhotosViewModel;
-import com.rewieer.brostagram.data.ImageProvider;
+import com.rewieer.brostagram.data.repository.LocalImageRepository;
 import com.rewieer.brostagram.data.gallery.GalleryRecyclerViewAdapter;
 import com.rewieer.brostagram.data.gallery.GalleryRecyclerViewItemProvider;
-import com.rewieer.brostagram.view.fragment.ViewPagerFragmentLifecycle;
-import com.rewieer.brostagram.view.ui.IOSButton;
-
-import java.util.List;
 
 public class GalleryAddTab extends Fragment {
-    private final static int IMAGES_PER_ROW = 3;
+    private final static int IMAGES_PER_ROW = 2;
 
     public interface Listener {
-        void onImageSelected(@Nullable Image image);
+        void onImageSelected(@Nullable LocalImage image);
     }
 
     GalleryPhotosViewModel mViewModel;
-    ImageProvider mImageProvider;
+    LocalImageRepository mLocalImageProvider;
     Listener mListener;
 
     public GalleryAddTab() {
@@ -66,17 +60,20 @@ public class GalleryAddTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_tab_add_gallery, container, false);
 
-        if (mImageProvider == null) {
+        if (mLocalImageProvider == null) {
             // We load it only once as it depends on the application context which doesn't change
-            mImageProvider = new ImageProvider(getContext().getApplicationContext());
+            mLocalImageProvider = new LocalImageRepository(getContext().getApplicationContext());
         }
 
         mViewModel = ViewModelProviders.of(this).get(GalleryPhotosViewModel.class);
 
-        GalleryRecyclerViewAdapter adapter = new GalleryRecyclerViewAdapter(getContext(), getViewLifecycleOwner(), mViewModel);
+        final GalleryRecyclerViewAdapter adapter = new GalleryRecyclerViewAdapter(getContext(), getViewLifecycleOwner(), mViewModel);
         RecyclerView recyclerView = view.findViewById(R.id.addGalleryRecyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), IMAGES_PER_ROW));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setNestedScrollingEnabled(false);
 
         final GalleryRecyclerViewItemProvider provider = new GalleryRecyclerViewItemProvider(mViewModel, ItemKeyProvider.SCOPE_MAPPED);
         final SelectionTracker<Long> tracker = new SelectionTracker.Builder<>(
@@ -103,7 +100,13 @@ public class GalleryAddTab extends Fragment {
             })
             .build();
 
+
         tracker.addObserver(new SelectionTracker.SelectionObserver() {
+            @Override
+            public void onItemStateChanged(@NonNull Object key, boolean selected) {
+
+            }
+
             @Override
             public void onSelectionChanged() {
                 if (mListener == null) {
@@ -127,6 +130,11 @@ public class GalleryAddTab extends Fragment {
                 } else {
                     mListener.onImageSelected(mViewModel.getImages().get(provider.getPosition(id)));
                 }
+            }
+
+            @Override
+            public void onSelectionRefresh() {
+                Log.d("LOG", "REFRESH");
             }
         });
 
@@ -164,7 +172,7 @@ public class GalleryAddTab extends Fragment {
      * Load images, feed it our ViewModel
      */
     public void loadImages() {
-        ImageProvider loader = new ImageProvider(getContext().getApplicationContext());
-        mViewModel.setImages(loader.loadGalleryImages());
+        LocalImageRepository loader = new LocalImageRepository(getContext().getApplicationContext());
+        mViewModel.setImages(loader.fetch());
     }
 }

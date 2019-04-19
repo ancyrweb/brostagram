@@ -5,20 +5,20 @@ import androidx.lifecycle.ViewModel;
 import androidx.annotation.Nullable;
 
 import com.rewieer.brostagram.RequestStatus;
-import com.rewieer.brostagram.data.entity.Image;
+import com.rewieer.brostagram.data.entity.LocalImage;
 
 import java.util.ArrayList;
 
 public class GalleryPhotosViewModel extends ViewModel {
-    MutableLiveData<RequestStatus<ArrayList<Image>>> request = new MutableLiveData<>();
+    MutableLiveData<RequestStatus<ArrayList<LocalImage>>> request = new MutableLiveData<>();
 
     public GalleryPhotosViewModel() {
         // Loading initial object, that will be reused
-        request.setValue(RequestStatus.loading((ArrayList<Image>) null));
+        request.setValue(RequestStatus.loading((ArrayList<LocalImage>) null));
     }
 
-    private void update(RequestStatus.Status status, @Nullable ArrayList<Image> images, @Nullable String message) {
-        RequestStatus<ArrayList<Image>> requestStatus = request.getValue();
+    private void update(RequestStatus.Status status, @Nullable ArrayList<LocalImage> images, @Nullable String message) {
+        RequestStatus<ArrayList<LocalImage>> requestStatus = request.getValue();
         if (requestStatus == null)
             return;
 
@@ -28,7 +28,7 @@ public class GalleryPhotosViewModel extends ViewModel {
         request.setValue(requestStatus);
     }
 
-    public void setImages(ArrayList<Image> images) {
+    public void setImages(ArrayList<LocalImage> images) {
         update(RequestStatus.Status.SUCCESS, images, null);
     }
 
@@ -40,15 +40,15 @@ public class GalleryPhotosViewModel extends ViewModel {
         update(RequestStatus.Status.LOADING, null, null);
     }
 
-    public MutableLiveData<RequestStatus<ArrayList<Image>>> getData() {
+    public MutableLiveData<RequestStatus<ArrayList<LocalImage>>> getData() {
         return request;
     }
 
-    public RequestStatus<ArrayList<Image>> getRawData() {
+    public RequestStatus<ArrayList<LocalImage>> getRawData() {
         return request.getValue();
     }
 
-    public ArrayList<Image> getImages() {
+    public ArrayList<LocalImage> getImages() {
         return request.getValue().data;
     }
 

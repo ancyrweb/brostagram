@@ -5,15 +5,13 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.pages.LauncherPageFragment">
+    tools:context=".view.fragment.tabs.customize.FiltersCustomizeTab">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/addGalleryRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:clipChildren="true"
-        android:clipToPadding="true"
-        android:scrollbars="vertical"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

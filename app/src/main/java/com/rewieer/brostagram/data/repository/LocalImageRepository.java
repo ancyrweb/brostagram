@@ -1,16 +1,15 @@
-package com.rewieer.brostagram.data;
+package com.rewieer.brostagram.data.repository;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MergeCursor;
 import android.provider.MediaStore;
-import android.util.Log;
 
-import com.rewieer.brostagram.data.entity.Image;
+import com.rewieer.brostagram.data.entity.LocalImage;
 
 import java.util.ArrayList;
 
-public class ImageProvider {
+public class LocalImageRepository {
     private Context mContext;
 
     private static String[] QUERY_FIELDS = new String[] {
@@ -20,11 +19,11 @@ public class ImageProvider {
         MediaStore.Images.Media.WIDTH
     };
 
-    public ImageProvider(Context context) {
+    public LocalImageRepository(Context context) {
         mContext = context;
     }
 
-    public ArrayList<Image> loadGalleryImages() {
+    public ArrayList<LocalImage> fetch() {
         Cursor externalImagesCursor = mContext.getContentResolver().query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             QUERY_FIELDS,
@@ -41,11 +40,11 @@ public class ImageProvider {
         );
 
         MergeCursor finalCursor = new MergeCursor(new Cursor[]{ externalImagesCursor, internalImagesCursor });
-        ArrayList<Image> images = new ArrayList<>(finalCursor.getCount());
+        ArrayList<LocalImage> images = new ArrayList<>(finalCursor.getCount());
 
         finalCursor.moveToFirst();
         while (finalCursor.isAfterLast() == false) {
-            Image image = new Image(
+            LocalImage image = new LocalImage(
                 finalCursor.getString(1),
                 finalCursor.getInt(2),
                 finalCursor.getInt(3)

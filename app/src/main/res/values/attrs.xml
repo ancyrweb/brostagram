@@ -5,6 +5,6 @@
             <enum name="standard" value="0" />
         </attr>
     </declare-styleable>
-    <declare-styleable name="IOSButton">
-    </declare-styleable>
+    <declare-styleable name="IOSButton"></declare-styleable>
+    <declare-styleable name="WorkingImageUI"></declare-styleable>
 </resources>

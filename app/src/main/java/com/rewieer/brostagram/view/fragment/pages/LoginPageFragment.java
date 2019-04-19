@@ -105,7 +105,6 @@ public class LoginPageFragment extends Fragment {
                     mButton.setEnabled(false);
                 } else if (request.status == RequestStatus.Status.SUCCESS) {
                     // Al right !!
-                    Log.d("TAGG", "Signed in successfully !");
                     mButton.setEnabled(true);
                 } else {
                     showErrorMessage(request.message);

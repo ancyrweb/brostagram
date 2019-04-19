@@ -37,7 +37,6 @@ public class HomePageFragment extends Fragment {
         // Creating tabs
         HomePageFragmentPagerAdapter adapter = new HomePageFragmentPagerAdapter(getChildFragmentManager());
         pager.setAdapter(adapter);
-        pager.setCurrentItem(0);
 
         final Map<Integer, Integer> tabPositionMap = createTabMap();
 
