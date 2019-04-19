@@ -36,7 +36,6 @@ public class AddPageFragment extends Fragment implements GalleryAddTab.Listener 
         final View view = inflater.inflate(R.layout.fragment_page_add, container, false);
         final ViewPager pager = view.findViewById(R.id.addPageViewPager);
 
-
         // Creating tabs
         final FragmentPagerAdapter adapter = new AddPageFragmentPagerAdapter(getChildFragmentManager(), this);
         pager.setAdapter(adapter);
@@ -54,7 +53,7 @@ public class AddPageFragment extends Fragment implements GalleryAddTab.Listener 
             public void onClick(View v) {
                 WorkingImageManager
                     .getInstance()
-                    .init(mSelectedImage.path);
+                    .init(mSelectedImage);
 
                 Navigation
                     .findNavController(getActivity(), R.id.navhost)

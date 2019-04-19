@@ -7,4 +7,5 @@
     </declare-styleable>
     <declare-styleable name="IOSButton"></declare-styleable>
     <declare-styleable name="WorkingImageUI"></declare-styleable>
+    <declare-styleable name="StandardInput"></declare-styleable>
 </resources>

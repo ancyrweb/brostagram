@@ -139,7 +139,7 @@ public class ImageDecoder {
                 int imageHeight = bitmapOptions.outHeight;
                 int sampleSize = 1;
 
-                if (options.hasDimensionsSet()) {
+                if (options != null && options.hasDimensionsSet()) {
                     // TODO : if desired width/height are superior, skip
                     sampleSize = SampleUtils.getSampleSize(imageWidth, imageHeight, options.width, options.height);
                 }

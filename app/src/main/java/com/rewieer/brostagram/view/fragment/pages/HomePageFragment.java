@@ -6,7 +6,6 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ public class HomePageFragment extends Fragment {
 
     public HomePageFragment() {
         // Required empty public constructor
-        Log.d("TAGG", "INSTANTIATING");
     }
 
     @Override
@@ -53,11 +51,13 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tabPositionMap.containsKey(tab.getPosition())) {
+                    // Select tab and return
                     pager.setCurrentItem(tabPositionMap.get(tab.getPosition()), false);
                     TintUtils.setTintColor(tab, ACTIVE_ICON_COLOR);
                     return;
                 }
 
+                // It's the middle icon, we go to the AddPageFragment
                 Navigation
                     .findNavController(getActivity(), R.id.navhost)
                     .navigate(R.id.action_navHomePage_to_addPageFragment);

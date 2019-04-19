@@ -60,5 +60,14 @@
     <fragment
         android:id="@+id/customizeImageFragment"
         android:name="com.rewieer.brostagram.view.fragment.pages.CustomizeImageFragment"
-        android:label="CustomizeImageFragment" />
+        android:label="CustomizeImageFragment" >
+        <action
+            android:id="@+id/action_customizeImageFragment_to_publishPageFragment"
+            app:destination="@id/publishPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishPageFragment"
+        android:name="com.rewieer.brostagram.view.fragment.pages.PublishPageFragment"
+        android:label="fragment_page_publish"
+        tools:layout="@layout/fragment_page_publish" />
 </navigation>

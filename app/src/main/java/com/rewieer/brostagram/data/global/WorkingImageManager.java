@@ -1,7 +1,9 @@
 package com.rewieer.brostagram.data.global;
 
+import com.rewieer.brostagram.data.entity.LocalImage;
 import com.rewieer.brostagram.data.entity.WorkingImage;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 /**
@@ -17,17 +19,29 @@ public class WorkingImageManager {
         return instance;
     }
 
-    MutableLiveData<WorkingImage> workingImage = new MutableLiveData<>();
+    private MutableLiveData<WorkingImage> workingImage = new MutableLiveData<>();
+    private @Nullable LocalImage localImage = null;
 
     public WorkingImageManager() {
 
     }
 
-    public void init(String path) {
-        workingImage.setValue(new WorkingImage(path));
+    public void init(LocalImage image) {
+        this.localImage = image;
+        workingImage.setValue(new WorkingImage(image.path));
+    }
+
+    public void clear() {
+        this.localImage = null;
+        workingImage.setValue(null);
     }
 
     public MutableLiveData<WorkingImage> getLiveData() {
         return workingImage;
+    }
+
+    @Nullable
+    public LocalImage getLocalImage() {
+        return localImage;
     }
 }

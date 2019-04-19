@@ -13,6 +13,7 @@ import com.rewieer.brostagram.data.entity.WorkingImage;
 import com.rewieer.brostagram.data.global.WorkingImageManager;
 import com.rewieer.brostagram.service.Image.ImageDecoder;
 import com.rewieer.brostagram.view.fragment.tabs.CustomizePageFragmentPagerAdapter;
+import com.rewieer.brostagram.view.ui.IOSButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,7 +33,6 @@ public class CustomizeImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_page_customize, container, false);
-
         final ImageView workingImageView = view.findViewById(R.id.customizeWorkingImage);
 
         ImageView backImage = view.findViewById(R.id.customizePageBackIcon);
@@ -81,6 +81,15 @@ public class CustomizeImageFragment extends Fragment {
                 }
             });
 
+        IOSButton nextButton = view.findViewById(R.id.customizePageNextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation
+                    .findNavController(getActivity(), R.id.navhost)
+                    .navigate(R.id.action_customizeImageFragment_to_publishPageFragment);
+            }
+        });
         return view;
     }
 }
